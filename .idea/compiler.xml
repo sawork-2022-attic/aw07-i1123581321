@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Annotation profile for micropos" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="false">
+          <entry name="$MAVEN_REPOSITORY$/org/mapstruct/mapstruct-processor/1.4.2.Final/mapstruct-processor-1.4.2.Final.jar" />
+          <entry name="$MAVEN_REPOSITORY$/org/mapstruct/mapstruct/1.4.2.Final/mapstruct-1.4.2.Final.jar" />
+        </processorPath>
+        <module name="pos-gateway" />
+        <module name="pos-carts" />
+        <module name="pos-discovery" />
+        <module name="pos-products" />
+        <module name="pos-api" />
+      </profile>
+    </annotationProcessing>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="pos-api" options="-parameters -Amapstruct.suppressGeneratorTimestamp=true -Amapstruct.suppressGeneratorVersionInfoComment=true -Amapstruct.defaultComponentModel=spring" />
+      <module name="pos-carts" options="-parameters -Amapstruct.suppressGeneratorTimestamp=true -Amapstruct.suppressGeneratorVersionInfoComment=true -Amapstruct.defaultComponentModel=spring" />
+      <module name="pos-discovery" options="-parameters -Amapstruct.suppressGeneratorTimestamp=true -Amapstruct.suppressGeneratorVersionInfoComment=true -Amapstruct.defaultComponentModel=spring" />
+      <module name="pos-gateway" options="-parameters -Amapstruct.suppressGeneratorTimestamp=true -Amapstruct.suppressGeneratorVersionInfoComment=true -Amapstruct.defaultComponentModel=spring" />
+      <module name="pos-products" options="-parameters -Amapstruct.suppressGeneratorTimestamp=true -Amapstruct.suppressGeneratorVersionInfoComment=true -Amapstruct.defaultComponentModel=spring" />
+    </option>
+  </component>
+</project>
