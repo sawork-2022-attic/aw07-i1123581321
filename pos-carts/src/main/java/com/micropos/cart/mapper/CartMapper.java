@@ -18,9 +18,8 @@ public interface CartMapper {
     Collection<Cart> toCarts(Collection<CartDto> cartDtos);
 
     default Cart toCart(CartDto cartDto) {
-        return new Cart(cartDto.getId(),
-                toItems(cartDto.getItems(), cartDto));
-
+        return new Cart(
+                toItems(cartDto.getItems()));
     }
 
     default CartDto toCartDto(Cart cart) {
@@ -28,30 +27,9 @@ public interface CartMapper {
                 .items(toItemDtos(cart.getItems()));
     }
 
+    List<CartItemDto> toItemDtos(List<Item> items);
 
-    default List<CartItemDto> toItemDtos(List<Item> items) {
-        if (items == null || items.isEmpty()) {
-            return null;
-        }
-        List<CartItemDto> list = new ArrayList<>(items.size());
-        for (Item item : items) {
-            list.add(toItemDto(item));
-        }
-
-        return list;
-    }
-
-    default List<Item> toItems(List<CartItemDto> itemDtos, CartDto cartDto) {
-        if (itemDtos == null || itemDtos.isEmpty()) {
-            return null;
-        }
-        List<Item> list = new ArrayList<>(itemDtos.size());
-        for (CartItemDto itemDto : itemDtos) {
-            list.add(toItem(itemDto, cartDto));
-        }
-
-        return list;
-    }
+    List<Item> toItems(List<CartItemDto> itemDtos);
 
     default CartItemDto toItemDto(Item item) {
 
@@ -60,10 +38,8 @@ public interface CartMapper {
                 .product(getProductDto(item));
     }
 
-    default Item toItem(CartItemDto itemDto, CartDto cartDto) {
+    default Item toItem(CartItemDto itemDto) {
         return new Item(
-                itemDto.getId(),
-                cartDto.getId(),
                 itemDto.getProduct().getId(),
                 itemDto.getProduct().getName(),
                 itemDto.getProduct().getPrice(),

@@ -9,6 +9,8 @@
         <module>pos-discovery</module>
         <module>pos-gateway</module>
         <module>pos-api</module>
+        <module>pos-order</module>
+        <module>pos-delivery</module>
     </modules>
 
     <parent>
@@ -31,7 +33,6 @@
         <spring-cloud.version>2021.0.1</spring-cloud.version>
         <swagger2.version>3.0.0</swagger2.version>
         <jsoup.version>1.12.1</jsoup.version>
-        <lombok.version>1.18.22</lombok.version>
     </properties>
 
     <dependencies>
@@ -49,41 +50,43 @@
 
     <dependencyManagement>
         <dependencies>
+
             <dependency>
                 <groupId>org.openapitools</groupId>
                 <artifactId>jackson-databind-nullable</artifactId>
                 <version>0.2.2</version>
             </dependency>
+
             <dependency>
                 <groupId>io.springfox</groupId>
                 <artifactId>springfox-swagger2</artifactId>
                 <version>${swagger2.version}</version>
             </dependency>
+
             <dependency>
                 <groupId>org.mapstruct</groupId>
                 <artifactId>mapstruct</artifactId>
                 <version>${mapstruct.version}</version>
             </dependency>
+
             <dependency>
                 <groupId>org.mapstruct</groupId>
                 <artifactId>mapstruct-processor</artifactId>
                 <version>${mapstruct.version}</version>
             </dependency>
+
             <dependency>
                 <groupId>org.jsoup</groupId>
                 <artifactId>jsoup</artifactId>
                 <version>${jsoup.version}</version>
             </dependency>
-            <dependency>
-                <groupId>org.projectlombok</groupId>
-                <artifactId>lombok</artifactId>
-                <version>${lombok.version}</version>
-            </dependency>
+
             <dependency>
                 <groupId>com.micropos</groupId>
                 <artifactId>pos-api</artifactId>
                 <version>${project.version}</version>
             </dependency>
+
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>
@@ -102,6 +105,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
         </plugins>
+
         <pluginManagement>
             <plugins>
                 <plugin>

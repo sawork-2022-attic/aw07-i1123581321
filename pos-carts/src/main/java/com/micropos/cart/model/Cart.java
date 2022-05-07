@@ -10,10 +10,10 @@ import java.util.List;
 public class Cart implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "cart_items",
             joinColumns = @JoinColumn(name = "cart_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "item_id", referencedColumnName = "id")
@@ -31,8 +31,7 @@ public class Cart implements Serializable {
     public Cart() {
     }
 
-    public Cart(Integer id, List<Item> items) {
-        this.id = id;
+    public Cart(List<Item> items) {
         this.items = items;
     }
 

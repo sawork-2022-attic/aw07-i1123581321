@@ -190,6 +190,84 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
+  /orders:
+    get:
+      summary: List all orders
+      operationId: listOrders
+      tags:
+        - orders
+      responses:
+        200:
+          description: array of orders
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Orders"
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    post:
+      summary: Create a order
+      operationId: createOrder
+      tags:
+        - orders
+      requestBody:
+        description: a cart
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Cart"
+        required: true
+      responses:
+        201:
+          description: The order was successfully created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+  /orders/{orderId}:
+    get:
+      summary: info for a specific order
+      operationId: showOrderById
+      tags:
+        - orders
+      parameters:
+        - name: orderId
+          in: path
+          required: true
+          description: The id of the order to retrieve
+          schema:
+            type: integer
+            format: int32
+      responses:
+        200:
+          description: Expected response to a valid request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Order"
+  /waybills:
+    get:
+      summary: List all waybills
+      operationId: listWaybills
+      tags:
+        - waybills
+      responses:
+        200:
+          description: array of waybills
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Waybills"
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
 components:
   schemas:
     Carts:
@@ -217,6 +295,36 @@ components:
           type: array
           items:
             $ref: "#/components/schema/CartItem"
+    Orders:
+      type: array
+      items:
+        $ref: "#/components/schemas/Order"
+    Order:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        total:
+          type: number
+          format: double
+        items:
+          type: array
+          items:
+            $ref: "#/components/schemas/CartItem"
+    Waybills:
+      type: array
+      items:
+        $ref: "#/components/schemas/Waybill"
+    Waybill:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        order_id:
+          type: integer
+          format: int32
     Product:
       type: object
       required:

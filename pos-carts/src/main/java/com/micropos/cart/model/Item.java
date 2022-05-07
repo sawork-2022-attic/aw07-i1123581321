@@ -7,11 +7,8 @@ import java.io.Serializable;
 @Table(name = "items")
 public class Item implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-
-    @Column(name="cart_id")
-    private Integer cartId;
 
     @Column(name = "product_id")
     private String productId;
@@ -28,9 +25,7 @@ public class Item implements Serializable {
     public Item() {
     }
 
-    public Item(Integer id, Integer cartId, String productId, String productName, double unitPrice, int quantity) {
-        this.id = id;
-        this.cartId = cartId;
+    public Item(String productId, String productName, double unitPrice, int quantity) {
         this.productId = productId;
         this.productName = productName;
         this.unitPrice = unitPrice;
@@ -43,14 +38,6 @@ public class Item implements Serializable {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public Integer getCartId() {
-        return cartId;
-    }
-
-    public void setCartId(Integer cartId) {
-        this.cartId = cartId;
     }
 
     public String getProductId() {
@@ -83,17 +70,5 @@ public class Item implements Serializable {
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
-    }
-
-    @Override
-    public String toString() {
-        return "Item{" +
-                "id=" + id +
-                ", cartId=" + cartId +
-                ", productId='" + productId + '\'' +
-                ", productName='" + productName + '\'' +
-                ", unitPrice=" + unitPrice +
-                ", quantity=" + quantity +
-                '}';
     }
 }

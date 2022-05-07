@@ -14,9 +14,4 @@ public class CartApplication {
         SpringApplication.run(CartApplication.class, args);
     }
 
-    @Bean
-    @LoadBalanced
-    public RestTemplate restTemplate(){
-        return new RestTemplate();
-    }
 }

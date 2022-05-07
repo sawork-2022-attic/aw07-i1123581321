@@ -61,6 +61,7 @@
             <groupId>org.ehcache</groupId>
             <artifactId>ehcache</artifactId>
         </dependency>
+
         <dependency>
             <groupId>com.micropos</groupId>
             <artifactId>pos-api</artifactId>

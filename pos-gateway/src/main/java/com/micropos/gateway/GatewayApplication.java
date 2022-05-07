@@ -13,6 +13,10 @@ public class GatewayApplication {
     private static final String PRODUCT = "lb://product-service";
     private static final String CART = "lb://cart-service";
 
+    private static final String ORDER = "lb://order-service";
+
+    private static final String DELIVERY = "lb://delivery-service";
+
     public static void main(String[] args) {
         SpringApplication.run(GatewayApplication.class, args);
     }
@@ -26,6 +30,12 @@ public class GatewayApplication {
                 .route(p -> p.path("/carts/**")
                         .filters(f -> f.stripPrefix(1))
                         .uri(CART))
+                .route(p -> p.path("/orders/**")
+                        .filters(f -> f.stripPrefix(1))
+                        .uri(ORDER))
+                .route(p -> p.path("/waybills/**")
+                        .filters(f -> f.stripPrefix(1))
+                        .uri(DELIVERY))
                 .build();
     }
 }

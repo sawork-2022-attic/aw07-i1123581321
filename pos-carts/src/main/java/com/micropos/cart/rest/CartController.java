@@ -36,7 +36,7 @@ public class CartController implements CartsApi {
     public ResponseEntity<CartDto> addItemToCart(Integer cartId, CartItemDto cartItemDto) {
         var cart = cartService.getCart(cartId).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "cart not found"));
         var cartDto = cartMapper.toCartDto(cart);
-        cartService.add(cart, cartMapper.toItem(cartItemDto, cartDto));
+        cartService.add(cart, cartMapper.toItem(cartItemDto));
         return ResponseEntity.ok(cartMapper.toCartDto(cart));
     }
 
