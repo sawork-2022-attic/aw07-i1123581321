@@ -1,9 +1,25 @@
 # aw07
 
-Please extend your MicroPOS system by adding a delivery service shown as the following figure.
+本次作业基于 AW05 的基础，增加了两个新的微服务：订单管理和运单管理，这两个微服务间通过 rabbitmq 消息队列进行通信
 
-![](10-pos.svg)
+测试方法：使用
 
-When an order is placed by a user, the order serivce sends out an event into some AMQP MOM (such as RabbitMQ). The delivery service will be notified and a new delivery entry will be generated automatically. User can query the delivery status for his orders.
+```
+docker-compose up -d
+```
 
-Use [Spring Cloud Stream](https://spring.io/projects/spring-cloud-stream) to make the scenerio happen. Of coz you can refer to the [demo](https://github.com/sa-spring/stream-loan) for technical details.
+启动 rabbitmq，然后启动 discovery 服务，再依次启动其余服务即可
+
+运行 test-pos 下的 main.py，测试一轮完整的请求流程
+
+## 订单管理
+
+订单管理微服务管理订单资源，用户可以通过 POST 请求生成新的订单，每个订单包含了订单编号，购物项，总金额等。用户也可以通过该微服务查询现有的订单信息
+
+在生成订单的同时，订单服务会通过消息队列将订单信息发送出去，接收到消息的运单管理服务自动生成对应的运单
+
+由于这里的消息由 HTTP 请求触发，故不适用于 supplier，而是使用 `StreamBridge` 发送，在新版的 spring cloud 中无需指定 binding，会根据发送时的参数自动生成 binding
+
+## 运单管理
+
+运单管理微服务定义了一个 consumer 接受消息，在接受到订单信息时自动生成运单条目并存入数据库，只需在 application.yml 中定义对应的 binding 与 function 即可
